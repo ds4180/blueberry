@@ -2,6 +2,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
+from starlette.config import Config
+
+config = Config('.env')
+DATABASE = config('DATABASE')
+
 # import contextlib 
 
 ##
@@ -13,17 +18,17 @@ pymysql.install_as_MySQLdb()
 ##
 
 
-user_name = "root"
-user_pwd = "4180"
-db_host = "127.0.0.1"
-db_name = "test"
+# user_name = "root"
+# user_pwd = "4180"
+# db_host = "127.0.0.1"
+# db_name = "test"
 
-DATABASE = 'mysql://%s:%s@%s/%s?charset=utf8' % (
-    user_name,
-    user_pwd,
-    db_host,
-    db_name,
-)
+# DATABASE = 'mysql://%s:%s@%s/%s?charset=utf8' % (
+#     user_name,
+#     user_pwd,
+#     db_host,
+#     db_name,
+# )
 
 ENGINE = create_engine(
     DATABASE,
