@@ -14,7 +14,9 @@ const fastapi = (operation, url, params, success_callback, failure_callback) => 
         body = qs.stringify(params)
     }
 
-    let _url = import.meta.env.VITE_SERVER_URL+url
+    // let _url = import.meta.env.VITE_SERVER_URL+url
+    let _url = 'http://15.165.94.119:8000'+url
+
     if(method === 'get') {
         _url += "?" + new URLSearchParams(params)
     }
