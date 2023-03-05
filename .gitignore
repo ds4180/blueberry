@@ -1,4 +1,7 @@
+.idea
+myapi.db
+*.pyc
 __pycache__
 migrations
-alemibic.ini
-
+alembic.ini
+.env
