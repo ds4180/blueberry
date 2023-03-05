@@ -3,8 +3,6 @@ import { access_token, username, is_login } from "./store"
 import { get } from 'svelte/store'
 import { push } from 'svelte-spa-router'
 
-
-
 const fastapi = (operation, url, params, success_callback, failure_callback) => {
     let method = operation
     let content_type = 'application/json'
@@ -16,12 +14,7 @@ const fastapi = (operation, url, params, success_callback, failure_callback) => 
         body = qs.stringify(params)
     }
 
-
     let _url = import.meta.env.VITE_SERVER_URL+url
-
-    // let _url = import.meta.env.VITE_SERVER_URL+url
-        
-
     if(method === 'get') {
         _url += "?" + new URLSearchParams(params)
     }
@@ -37,7 +30,6 @@ const fastapi = (operation, url, params, success_callback, failure_callback) => 
     if (_access_token) {
         options.headers["Authorization"] = "Bearer " + _access_token
     }
-
 
     if (method !== 'get') {
         options['body'] = body
@@ -57,13 +49,12 @@ const fastapi = (operation, url, params, success_callback, failure_callback) => 
                         if(success_callback) {
                             success_callback(json)
                         }
-                      }else if(operation !== 'login' && response.status === 401) { // token time out
+                    }else if(operation !== 'login' && response.status === 401) { // token time out
                         access_token.set('')
                         username.set('')
                         is_login.set(false)
                         alert("로그인이 필요합니다.")
                         push('/user-login')
-
                     }else {
                         if (failure_callback) {
                             failure_callback(json)
